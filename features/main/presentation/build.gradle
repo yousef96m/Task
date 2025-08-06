@@ -1,0 +1,15 @@
+plugins {
+    id 'convention.android-feature-presentation'
+}
+
+android {
+    namespace 'com.syarah.yousuf.task.features.main.presentation'
+}
+
+dependencies {
+    implementation(project(':features:main:domain'))
+    implementation(project(':features:main:data'))
+    implementation(project(':core:error-handler'))
+    implementation(project(":core:coroutines"))
+    implementation(project(':core:android'))
+}

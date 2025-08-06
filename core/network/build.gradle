@@ -1,0 +1,20 @@
+plugins {
+    id 'convention.android-feature-data'
+}
+
+android {
+
+    productFlavors.configureEach {
+        buildConfigField("String", "API_BASE_URL", "\"" + rootProject.getProperty("app.api.base.${name}") + "\"")
+        buildConfigField("String", "VERSION_NAME", "\"" + rootProject.getProperty("app.version.name") + "\"")
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+    namespace 'com.syarah.yousuf.task.core.network'
+}
+
+dependencies {
+    implementation(project(':core:error-handler'))
+}

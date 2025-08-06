@@ -1,0 +1,60 @@
+plugins {
+    id("com.android.application")
+    id("convention.android-base")
+}
+
+android {
+    namespace 'com.syarah.yousuf.task'
+
+    defaultConfig {
+        applicationId "com.syarah.yousuf.task"
+
+        versionCode Integer.parseInt(getProperty("app.version.code"))
+        versionName getProperty("app.version.name")
+    }
+
+    signingConfigs {
+
+        release {
+        }
+
+        debug {
+        }
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+
+        development {
+            dimension "version"
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
+
+        staging {
+            dimension "version"
+            applicationIdSuffix ".staging"
+            versionNameSuffix "-stage"
+        }
+
+        production {
+            dimension "version"
+        }
+    }
+
+    buildTypes {
+
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+
+        }
+    }
+}

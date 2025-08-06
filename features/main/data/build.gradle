@@ -1,0 +1,13 @@
+plugins {
+    id 'convention.android-feature-data'
+}
+
+android {
+    namespace 'com.syarah.yousuf.task.features.main.data'
+}
+
+dependencies {
+    implementation(project(':core:error-handler'))
+    implementation(project(':core:network'))
+    implementation(project(':features:main:domain'))
+}

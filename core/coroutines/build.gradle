@@ -1,0 +1,7 @@
+plugins {
+    id("convention.android-feature-data")
+}
+
+android {
+    namespace 'com.syarah.yousuf.task.core.coroutines'
+}

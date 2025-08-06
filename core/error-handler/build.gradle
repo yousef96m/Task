@@ -1,0 +1,12 @@
+plugins {
+    id 'convention.android-feature-data'
+    id 'convention.android-feature-presentation'
+}
+
+android {
+    namespace 'com.syarah.yousuf.task.core.errorhandler'
+}
+
+dependencies {
+    implementation(project(':core:android'))
+}

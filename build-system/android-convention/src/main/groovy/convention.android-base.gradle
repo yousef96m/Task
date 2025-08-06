@@ -1,0 +1,62 @@
+plugins {
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp")
+    id("org.jetbrains.kotlin.plugin.serialization")
+}
+
+android {
+    compileSdk 36
+
+    defaultConfig {
+        minSdk 28
+        targetSdk 36
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+
+        development {
+            dimension "version"
+        }
+
+        staging {
+            dimension "version"
+        }
+
+        production {
+            dimension "version"
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
+dependencies {
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.startup.runtime)
+    implementation(libs.androidx.lifecycle.runtime)
+
+    implementation(libs.di.dagger.hilt)
+    kapt(libs.di.dagger.hilt.compiler)
+    implementation(libs.di.navigation.compose)
+    kapt(libs.di.androidx.hilt.compiler)
+    implementation(libs.di.inject)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.network.retrofit.serialization)
+    implementation(libs.gson)
+
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+}

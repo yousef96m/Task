@@ -1,0 +1,11 @@
+plugins {
+    id 'convention.android-feature-domain'
+}
+
+android {
+    namespace 'com.syarah.yousuf.features.main.domain'
+}
+
+dependencies {
+
+}
