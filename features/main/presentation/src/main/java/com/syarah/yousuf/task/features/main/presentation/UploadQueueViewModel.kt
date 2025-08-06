@@ -4,12 +4,19 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.work.Constraints
+import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.syarah.yousuf.task.features.main.domain.model.UploadItem
 import com.syarah.yousuf.task.features.main.domain.model.UploadStatus
-import com.syarah.yousuf.task.features.main.domain.usecase.*
+import com.syarah.yousuf.task.features.main.domain.usecase.AddImageToQueueUseCase
+import com.syarah.yousuf.task.features.main.domain.usecase.GetActiveUploadsUseCase
+import com.syarah.yousuf.task.features.main.domain.usecase.GetUploadsUseCase
+import com.syarah.yousuf.task.features.main.domain.usecase.PauseAllUploadsUseCase
+import com.syarah.yousuf.task.features.main.domain.usecase.UpdateStatusUseCase
+import com.syarah.yousuf.task.features.main.domain.usecase.UpdateWorkIdUseCase
 import com.syarah.yousuf.task.features.main.domain.worker.UploadWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -51,13 +58,17 @@ class UploadQueueViewModel @Inject constructor(
                     "uri" to item.uri
                 )
             )
+            .setConstraints(
+                Constraints.Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build()
+            )
             .build()
 
         viewModelScope.launch {
             updateWorkIdUseCase(item.id, request.id.toString())
         }
         WorkManager.getInstance(context).enqueue(request)
-
     }
 
     fun cancelUpload(id: String, context: Context) = viewModelScope.launch {
