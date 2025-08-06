@@ -16,14 +16,6 @@ import android.widget.Toast
  * @author Yousuf Abu Fadda
  */
 
-fun startGooglePlayStoreRatingApp(context: Context) {
-    val intent = Intent(
-        Intent.ACTION_VIEW,
-        Uri.parse("https://play.google.com/store/apps/details?id=com.motory.ksa.motoryshop")
-    )
-    context.startActivity(intent)
-}
-
 fun Context.startDialIntent(phoneNumber: String) {
     val intent = Intent(Intent.ACTION_DIAL)
     intent.data = Uri.parse("tel:$phoneNumber")
